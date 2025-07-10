@@ -1,0 +1,1 @@
+# mcp-store-for-jetbrains
