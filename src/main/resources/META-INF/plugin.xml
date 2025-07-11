@@ -1,0 +1,48 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.autohome.mcp-store-for-jetbrains</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>MCP Store</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor url="https://www.autohome.com.cn/">Autohome</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description>Seamlessly install and manage MCP-Server across your AI coding environments. This extension enables
+        one-click deployment of MCP-Server to Lingma, and other compatible platforms.
+        Connect to private MCP Stores for secure. Streamline your development workflow with enterprise-grade MCP
+        ecosystem integration directly in your editor.
+    </description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <idea-version since-build="223.*" until-build="501.*"/>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.autohome.mcpstore.settings.McpStoreSettingsState"/>
+        <applicationConfigurable instance="com.autohome.mcpstore.settings.McpStoreSettingsConfigurablePanel"
+                                 id="McpStoreSettings"
+                                 displayName="MCP Store Settings"/>
+        <notificationGroup id="MCP Store" displayType="STICKY_BALLOON" isLogByDefault="true"/>
+
+        <projectService id="McpStoreSideWindowService"
+                        serviceImplementation="com.autohome.mcpstore.services.McpStoreSideWindowService"/>
+        <projectService id="LogService" serviceImplementation="com.autohome.mcpstore.services.NotificationService"/>
+
+        <projectService serviceImplementation="com.autohome.mcpstore.services.McpStoreService"/>
+        <projectService serviceImplementation="com.autohome.mcpstore.services.McpClientManagerService"/>
+
+        <toolWindow id="MCP Store" anchor="right" icon="/icons/pluginIcon.svg"
+                    factoryClass="com.autohome.mcpstore.toolwindow.McpStoreToolWindowFactory"/>
+    </extensions>
+    <actions>
+    </actions>
+</idea-plugin>
