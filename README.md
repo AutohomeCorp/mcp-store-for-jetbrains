@@ -1,28 +1,45 @@
 # Mcp Store
 
-Seamlessly install and manage MCP-Server across your AI coding environments. This extension enables one-click deployment of MCP-Server to lingma, and other compatible platforms. Connect to private MCP Stores for secure. Streamline your development workflow with enterprise-grade MCP ecosystem integration directly in your editor.
+Seamlessly install and manage MCP-Server across your AI coding environments. This extension enables one-click deployment of MCP-Server to Cline, GitHub Copilot, Cursor, Trae, and other compatible platforms. Connect to private MCP Stores for secure. Streamline your development workflow with enterprise-grade MCP ecosystem integration directly in your editor.
 
 ## Features
 
 - Retrieve MCP list
 - Install/Uninstall MCP-Server
-- Connect to private MCP-Server data sources
+- Connect to private MCP-Server data sources(The interfaces need to be implemented as defined in the documentation. )
 
 ## User Documentation
 
 ### Installation
 
-#### Installing the mcp-store Plugin in Idea
+#### Installing the mcp-store Plugin in VSCode
 
-- Open the settings -> plugins, search for **mcp-store**, and click **Install**.
+- Open the VSCode extension marketplace, search for **mcp-store**, and click **Install**.
 
+![alt text](https://raw.githubusercontent.com/AutohomeCorp/mcp-store-for-vscode/refs/heads/main/img/image-2.png)
 
+#### Installing the mcp-store Plugin in Trae
+
+- Open the Trae extension marketplace, search for **mcp-store**, and click **Install**.
+
+**Note:** By default, Trae syncs with the official VSCode extension marketplace, but there may be delays (ranging from minutes to days). To avoid this, we recommend setting the marketplace URL to **[https://open-vsx.org/](https://open-vsx.org/)** (extensions are published in real-time to both the official VSCode marketplace and Open-VSX).
+
+![alt text](https://raw.githubusercontent.com/AutohomeCorp/mcp-store-for-vscode/refs/heads/main/img/image-1.png)
+
+#### Installing the mcp-store Plugin in Cursor
+
+- Open the Cursor extension marketplace, search for **mcp-store**, and click **Install**.
+
+**Note:** Cursor syncs with the official VSCode extension marketplace by default, but synchronization delays may occur—ranging from minutes to several days.
 
 ## Usage
 
 ### Setting the mcp-server API Address
 
-- If the **mcp-server API address** is not configured, click the settings button in the plugin function page header, set the **mcp-server API address** first
+- If the **mcp-server API address** is not configured, opening the VSCode extension marketplace will automatically redirect to the settings page, highlighting the API address field.
+- To update the **mcp-server API address**, click the settings button in the plugin function page header.
+
+![alt text](https://raw.githubusercontent.com/AutohomeCorp/mcp-store-for-vscode/refs/heads/main/img/image-8.png)
 
 ### Installing/Uninstalling mcp-server
 
@@ -32,11 +49,7 @@ Seamlessly install and manage MCP-Server across your AI coding environments. Thi
     - **Gray** = Not Installed
 - Click a gray **mcp-client** to install it; click a green one to uninstall.
 
-![](img/index.png)
-
-### Starting mcp-server
-
-- **Lingma**: Starts automatically after installation.
+![alt text](https://raw.githubusercontent.com/AutohomeCorp/mcp-store-for-vscode/refs/heads/main/img/image.png)
 
 
 ## Interface Definition
@@ -48,7 +61,7 @@ The server must implement the following interface functionalities:
 - Get mcp-server source list
 - Metric Report
 - Get mcp-store configuration
--
+
 ### 1. Get mcp-server List
 
 #### Request
@@ -86,6 +99,7 @@ The server must implement the following interface functionalities:
 | result.list.supplier | string | mcp supplier 
 | result.list.submitter | string | mcp submitter 
 | result.list.gitStarCount | number | mcp git star count
+| result.list.detailPageUrl | string | detail Page URL 
 | result.serverCategories | array | mcp category list
 | result.serverCategories.id | number | mcp category id
 | result.serverCategories.name | string | mcp category name
@@ -110,7 +124,8 @@ Success response:
           "source": 2,
           "supplier": "modelcontextprotocol",
           "submitter": "admin",
-          "gitStarCount": 46612
+          "gitStarCount": 46612,
+          "detailPageUrl": "https://xxx.cn/detail"
         }
       ],
   "serverCategories": [
@@ -150,13 +165,13 @@ Error response:
 
 #### Response
 
-| Parameter | Type | Description |
----|---|---|---|
-| returncode | number | Status code |
-| message | string | Description |
-| result | object | Result |
-| result.name | string | mcp name |
-| result.serverConfig | string | mcp startup configuration command, can be parsed into JSON object using `JSON.parse`. Corresponds to the `mcpServerConfig` field in client. |
+Parameter | Type | Description
+---|---|---
+| returncode | number | Status code
+| message | string | Description
+| result | object | Result
+| result.name | string | mcp name
+| result.serverConfig | string | mcp startup configuration command, can be parsed into JSON object using JSON.parse. Corresponds to the mcpServerConfig field in client.
 
 Success response:
 

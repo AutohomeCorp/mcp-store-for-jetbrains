@@ -311,7 +311,7 @@ public class McpStoreSideWindow {
 
             @Override
             public void onLoadEnd(CefBrowser browser, CefFrame frame, int httpStatusCode) {
-                notificationService.info("JBCefBrowser", "Injected JavaScript callJava handler");
+                notificationService.debug("JBCefBrowser", "Injected JavaScript callJava handler");
             }
 
             @Override
@@ -320,13 +320,14 @@ public class McpStoreSideWindow {
             }
 
         }, browser.getCefBrowser());
-        browser.getJBCefClient().addDisplayHandler(new CefDisplayHandlerAdapter() {
+        //输出控制台日志
+        /*browser.getJBCefClient().addDisplayHandler(new CefDisplayHandlerAdapter() {
             @Override
             public boolean onConsoleMessage(CefBrowser browser, CefSettings.LogSeverity level, String message, String source, int line) {
                 System.out.println("Console [" + level + "]: " + message + " at " + source + ":" + line);
                 return false;
             }
-        }, browser.getCefBrowser());
+        }, browser.getCefBrowser());*/
     }
 
     private void registerLifeSpanHandler(JBCefBrowser browser) {

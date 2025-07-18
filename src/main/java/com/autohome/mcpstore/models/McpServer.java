@@ -9,6 +9,7 @@ public class McpServer {
     private String supplier;
     private String submitter;
     private Integer gitStarCount;
+    private String detailPageUrl;
 
     public String getName() {
         return name;
@@ -72,5 +73,13 @@ public class McpServer {
 
     public void setGitStarCount(Integer gitStarCount) {
         this.gitStarCount = gitStarCount;
+    }
+
+    public String getDetailPageUrl() {
+        return detailPageUrl;
+    }
+
+    public void setDetailPageUrl(String detailPageUrl) {
+        this.detailPageUrl = detailPageUrl;
     }
 }

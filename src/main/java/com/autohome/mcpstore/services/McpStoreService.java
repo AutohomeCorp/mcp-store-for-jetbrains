@@ -56,11 +56,8 @@ public class McpStoreService {
     }
 
     public McpStoreConfig getMcpStoreConfig() {
-        long startTime = System.currentTimeMillis();
         try {
             Protocol<McpStoreConfig> protocol = mcpStoreApi.getStoreConfig(Constant.APP_ID);
-            long duration = System.currentTimeMillis() - startTime;
-            notificationService.debug("time", "getMcpStoreConfig executed in " + duration + "ms");
             if (protocol != null && protocol.getReturncode() == Constant.PROTOCOL_RETURNCODE_SUCCESS) {
                 return protocol.getResult();
             } else {
@@ -75,11 +72,8 @@ public class McpStoreService {
     }
 
     public Protocol<List<ServerSource>> getServerSources() {
-        long startTime = System.currentTimeMillis();
         try {
             Protocol<List<ServerSource>> result = mcpStoreApi.getServerSources(Constant.APP_ID);
-            long duration = System.currentTimeMillis() - startTime;
-            notificationService.debug("time", "getServerSources executed in " + duration + "ms");
             return result;
         } catch (Exception e) {
             String message = "Failed to get server sources" + e.getMessage();
@@ -89,11 +83,8 @@ public class McpStoreService {
     }
 
     public Protocol<ServerListResponse<McpServer>> getServerList(QueryServerListParam request) {
-        long startTime = System.currentTimeMillis();
         try {
             Protocol<ServerListResponse<McpServer>> result = mcpStoreApi.getServerList(Constant.APP_ID, request);
-            long duration = System.currentTimeMillis() - startTime;
-            notificationService.debug("time", "getServerList executed in " + duration + "ms");
             return result;
         } catch (Exception e) {
             String message = "Failed to getServerList" + e.getMessage();
@@ -103,11 +94,8 @@ public class McpStoreService {
     }
 
     public void reportMetrics(ReportMetric request) {
-        long startTime = System.currentTimeMillis();
         try {
             mcpStoreApi.reportMetrics(Constant.APP_ID, request);
-            long duration = System.currentTimeMillis() - startTime;
-            notificationService.debug("time", "reportMetrics executed in " + duration + "ms");
         } catch (Exception e) {
             String message = "Failed to reportMetrics" + e.getMessage();
             notificationService.error("reportMetrics error", message);
@@ -115,7 +103,6 @@ public class McpStoreService {
     }
 
     public McpServerConfig getMcpServerConfig(String name) {
-        long startTime = System.currentTimeMillis();
         try {
             Protocol<McpServerDetail> protocol = mcpStoreApi.getServerDetail(Constant.APP_ID, name);
             if (protocol != null && protocol.getReturncode() == Constant.PROTOCOL_RETURNCODE_SUCCESS && protocol.getResult() != null
@@ -130,8 +117,6 @@ public class McpStoreService {
                 HashMap<String, McpServerConfig> mcpServers = data.get("mcpServers");
                 Set<Map.Entry<String, McpServerConfig>> entrySet = mcpServers.entrySet();
                 McpServerConfig result = entrySet.stream().findFirst().map(Map.Entry::getValue).orElse(null);
-                long duration = System.currentTimeMillis() - startTime;
-                notificationService.debug("time", "getMcpServerConfig executed in " + duration + "ms");
                 return result;
                 //获取map
             } else {

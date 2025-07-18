@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.autohome"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     maven { url = uri("https://maven.aliyun.com/repository/public/") }
