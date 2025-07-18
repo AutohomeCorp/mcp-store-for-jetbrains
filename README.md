@@ -1,6 +1,6 @@
 # Mcp Store
 
-Seamlessly install and manage MCP-Server across your AI coding environments. This extension enables one-click deployment of MCP-Server to Cline, GitHub Copilot, Cursor, Trae, and other compatible platforms. Connect to private MCP Stores for secure. Streamline your development workflow with enterprise-grade MCP ecosystem integration directly in your editor.
+Seamlessly install and manage MCP-Server across your AI coding environments. This extension enables one-click deployment of MCP-Server to lingma, and other compatible platforms. Connect to private MCP Stores for secure. Streamline your development workflow with enterprise-grade MCP ecosystem integration directly in your editor.
 
 ## Features
 
@@ -12,34 +12,19 @@ Seamlessly install and manage MCP-Server across your AI coding environments. Thi
 
 ### Installation
 
-#### Installing the mcp-store Plugin in VSCode
+#### Installing the mcp-store Plugin
 
-- Open the VSCode extension marketplace, search for **mcp-store**, and click **Install**.
+- Open the IDE extension marketplace, search for **mcp-store**, and click **Install**.
 
-![alt text](https://raw.githubusercontent.com/AutohomeCorp/mcp-store-for-vscode/refs/heads/main/img/image-2.png)
-
-#### Installing the mcp-store Plugin in Trae
-
-- Open the Trae extension marketplace, search for **mcp-store**, and click **Install**.
-
-**Note:** By default, Trae syncs with the official VSCode extension marketplace, but there may be delays (ranging from minutes to days). To avoid this, we recommend setting the marketplace URL to **[https://open-vsx.org/](https://open-vsx.org/)** (extensions are published in real-time to both the official VSCode marketplace and Open-VSX).
-
-![alt text](https://raw.githubusercontent.com/AutohomeCorp/mcp-store-for-vscode/refs/heads/main/img/image-1.png)
-
-#### Installing the mcp-store Plugin in Cursor
-
-- Open the Cursor extension marketplace, search for **mcp-store**, and click **Install**.
-
-**Note:** Cursor syncs with the official VSCode extension marketplace by default, but synchronization delays may occur—ranging from minutes to several days.
+![img_2.png](img/img_2.png)
 
 ## Usage
 
 ### Setting the mcp-server API Address
 
-- If the **mcp-server API address** is not configured, opening the VSCode extension marketplace will automatically redirect to the settings page, highlighting the API address field.
-- To update the **mcp-server API address**, click the settings button in the plugin function page header.
+- To set the **mcp-server API address**, click the settings button in the plugin function page header.
 
-![alt text](https://raw.githubusercontent.com/AutohomeCorp/mcp-store-for-vscode/refs/heads/main/img/image-8.png)
+![img_1.png](img/img_1.png)
 
 ### Installing/Uninstalling mcp-server
 
@@ -49,8 +34,7 @@ Seamlessly install and manage MCP-Server across your AI coding environments. Thi
     - **Gray** = Not Installed
 - Click a gray **mcp-client** to install it; click a green one to uninstall.
 
-![alt text](https://raw.githubusercontent.com/AutohomeCorp/mcp-store-for-vscode/refs/heads/main/img/image.png)
-
+![img.png](img/img.png)
 
 ## Interface Definition
 
