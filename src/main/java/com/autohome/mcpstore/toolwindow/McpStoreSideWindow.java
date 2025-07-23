@@ -1,5 +1,6 @@
 package com.autohome.mcpstore.toolwindow;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,10 +39,8 @@ import com.intellij.ui.jcef.JBCefBrowserBase;
 import com.intellij.ui.jcef.JBCefJSQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.cef.CefApp;
-import org.cef.CefSettings;
 import org.cef.browser.CefBrowser;
 import org.cef.browser.CefFrame;
-import org.cef.handler.CefDisplayHandlerAdapter;
 import org.cef.handler.CefLifeSpanHandlerAdapter;
 import org.cef.handler.CefLoadHandler;
 import org.cef.network.CefRequest;
@@ -100,8 +99,29 @@ public class McpStoreSideWindow {
 
     private Object getUITheme() {
         LafManager lafManager = LafManager.getInstance();
-        //return lafManager.getCurrentUIThemeLookAndFeel().getName();
-        return lafManager.getCurrentLookAndFeel().getName();
+        //lafManager.getCurrentUIThemeLookAndFeel().getName();
+        //lafManager.getCurrentLookAndFeel().getName();
+        try {
+            // 优先尝试调用 getCurrentUIThemeLookAndFeel().getName()
+            Method themeMethod = lafManager.getClass().getMethod("getCurrentUIThemeLookAndFeel");
+            Object lookAndFeel = themeMethod.invoke(lafManager);
+            Method getNameMethod = lookAndFeel.getClass().getMethod("getName");
+            return getNameMethod.invoke(lookAndFeel);
+        } catch (NoSuchMethodException e1) {
+            // 方法不存在时回退到 getCurrentLookAndFeel().getName()
+            try {
+                Method defaultMethod = lafManager.getClass().getMethod("getCurrentLookAndFeel");
+                Object lookAndFeel = defaultMethod.invoke(lafManager);
+                Method getNameMethod = lookAndFeel.getClass().getMethod("getName");
+                return getNameMethod.invoke(lookAndFeel);
+            } catch (Exception e2) {
+                notificationService.error("getUITheme error", "execute getCurrentLookAndFeel error" + e2.getMessage());
+            }
+        } catch (Exception e) {
+            notificationService.error("getUITheme error", e.getMessage());
+        }
+
+        return "Unknown";
     }
 
     private Object fetchMarketplace(String param) {

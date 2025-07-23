@@ -6,13 +6,13 @@ plugins {
 }
 
 group = "com.autohome"
-version = "1.0.0"
+version = "1.0.1"
 
 repositories {
     maven { url = uri("https://maven.aliyun.com/repository/public/") }
     maven { url = uri("https://maven.aliyun.com/repository/google/") }  // 新增谷歌镜像
     maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin/") }  // 新增gradle插件镜像
-
+    mavenLocal()
     mavenCentral()
     intellijPlatform {
         defaultRepositories()
