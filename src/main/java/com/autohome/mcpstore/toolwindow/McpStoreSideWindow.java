@@ -97,7 +97,7 @@ public class McpStoreSideWindow {
         return mcpStoreService.getServerSources();
     }
 
-    private Object getUITheme() {
+    private String getUITheme() {
         LafManager lafManager = LafManager.getInstance();
         //lafManager.getCurrentUIThemeLookAndFeel().getName();
         //lafManager.getCurrentLookAndFeel().getName();
@@ -106,14 +106,14 @@ public class McpStoreSideWindow {
             Method themeMethod = lafManager.getClass().getMethod("getCurrentUIThemeLookAndFeel");
             Object lookAndFeel = themeMethod.invoke(lafManager);
             Method getNameMethod = lookAndFeel.getClass().getMethod("getName");
-            return getNameMethod.invoke(lookAndFeel);
+            return (String)getNameMethod.invoke(lookAndFeel);
         } catch (NoSuchMethodException e1) {
             // 方法不存在时回退到 getCurrentLookAndFeel().getName()
             try {
                 Method defaultMethod = lafManager.getClass().getMethod("getCurrentLookAndFeel");
                 Object lookAndFeel = defaultMethod.invoke(lafManager);
                 Method getNameMethod = lookAndFeel.getClass().getMethod("getName");
-                return getNameMethod.invoke(lookAndFeel);
+                return (String)getNameMethod.invoke(lookAndFeel);
             } catch (Exception e2) {
                 notificationService.error("getUITheme error", "execute getCurrentLookAndFeel error" + e2.getMessage());
             }
@@ -381,10 +381,7 @@ public class McpStoreSideWindow {
                 .subscribe(LafManagerListener.TOPIC, new LafManagerListener() {
                     @Override
                     public void lookAndFeelChanged(LafManager source) {
-                        // Theme change handling logic
-                        LafManager lafManager = LafManager.getInstance();
-                        //String theme = lafManager.getCurrentUIThemeLookAndFeel().getName();
-                        String theme = lafManager.getCurrentLookAndFeel().getName();
+                        String theme = getUITheme();
                         browser.getCefBrowser().executeJavaScript(
                                 "window.postMessage({command: 'uIThemeChange', value: '" + theme + "'}, '*');",
                                 null,
